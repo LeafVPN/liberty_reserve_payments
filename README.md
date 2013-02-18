@@ -65,7 +65,7 @@ def validate_payment
     handler = LibertyReservePayments::Handler.new LIBERTY_CONFIG
     if handler.valid?(params)
         # The transaction has been validated. You can perform your own
-        # validations now
+        # validations now. You should specifically validate the amount that was paid.
     else
         # The transaction has been tampered with, you should log it for
         # later verification.

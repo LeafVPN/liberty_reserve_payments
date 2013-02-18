@@ -52,6 +52,8 @@ def pay_item_with_lr
     # The payment_request_uri takes the following arguments:
     # amount, currency = 'LRUSD', comments = '', order_id = '', item_name = ''
     # item_name and order_id are baggage fields that should aid you on the validation of the transaction
+    # The method will generate a URL containing the parameters for the payment and redirect to the
+    # Liberty Reserve website
     redirect_to handler.payment_request_uri(amount: @item.amount, order_id: '1', comment: 'Test Liberty')
 end
 ```

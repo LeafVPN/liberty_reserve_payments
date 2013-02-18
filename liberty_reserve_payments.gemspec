@@ -18,7 +18,6 @@ Gem::Specification.new do |gem|
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.require_paths = ["lib"]
   gem.add_development_dependency 'rspec-rails'
-  gem.add_dependency 'httparty', '>= 0.9.0'
   gem.add_dependency 'rails', '>= 3.2.12'
   gem.add_dependency 'attr_required', '>= 0.0.5'
 end

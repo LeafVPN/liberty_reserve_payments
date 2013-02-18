@@ -42,7 +42,34 @@ require 'liberty_reserve_payments/handler'
 LIBERTY_CONFIG = YAML.load_file("#{Rails.root}/config/liberty.yml")[Rails.env].symbolize_keys
 ```
 
-After
+After creating these files you still need to add the methods provided by this gem to your PaymentsController.
+To do this you can add the following template methods to you file:
+
+```ruby
+def pay_item_with_lr
+    handler = LibertyReservePayments::Handler.new LIBERTY_CONFIG
+    @item = Item.find(params[:id])
+    # The payment_request_uri takes the following arguments:
+    # amount, currency = 'LRUSD', comments = '', order_id = '', item_name = ''
+    # item_name and order_id are baggage fields that should aid you on the validation of the transaction
+    redirect_to handler.payment_request_uri(amount: @item.amount, order_id: '1', comment: 'Test Liberty')
+end
+```
+You should also add a route for Liberty Reserve to send the status of the transactions. It can point to a method
+looking like this:
+
+```ruby
+def validate_payment
+    handler = LibertyReservePayments::Handler.new LIBERTY_CONFIG
+    if handler.valid?(params)
+        # The transaction has been validated. You can perform your own
+        # validations now
+    else
+        # The transaction has been tampered with, you should log it for
+        # later verification.
+    end
+end
+```
 
 ## Contributing
 

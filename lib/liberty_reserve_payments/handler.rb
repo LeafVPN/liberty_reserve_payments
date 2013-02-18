@@ -9,12 +9,12 @@ module LibertyReservePayments
       super
     end
 
-    def payment_request_uri(amount, currency = 'LRUSD', comments = '', order_id, item_name)
+    def payment_request_uri(amount, currency = 'LRUSD', comments = '', order_id = '', item_name = '')
       endpoint = URI.parse ENDPOINT
-      q = {lr_acc: self.account_number, lr_store: self.store_name, lr_amnt: amount,
+      @query = {lr_acc: self.account_number, lr_store: self.store_name, lr_amnt: amount,
                         lr_currency: currency, lr_comments: comments, lr_merchant_ref: "OID_#{order_id}",
                         item_name: item_name, order_id: order_id}
-      endpoint.query = q.to_query
+      endpoint.query = @query.to_query
       endpoint.to_s
     end
 

@@ -23,24 +23,24 @@ Or install it yourself as:
 After the installation, you still need two files for the gem to work. A Yaml config file and an initializer.
 
 ### config/liberty.yml
-    ```yaml
-    development:
-      account_number: U1234567
-      store_name: SampleStore
-      security_word: test1234
+```yaml
+development:
+  account_number: U1234567
+  store_name: SampleStore
+  security_word: test1234
 
-    production:
-      account_number: U1234567
-      store_name: SampleStore
-      security_word: test1234
-    ```
+production:
+  account_number: U1234567
+  store_name: SampleStore
+  security_word: test1234
+```
 
 ### config/initializers/liberty.rb
-    ```ruby
-    require 'liberty_reserve_payments/handler'
+```ruby
+require 'liberty_reserve_payments/handler'
 
-    LIBERTY_CONFIG = YAML.load_file("#{Rails.root}/config/liberty.yml")[Rails.env].symbolize_keys
-    ```
+LIBERTY_CONFIG = YAML.load_file("#{Rails.root}/config/liberty.yml")[Rails.env].symbolize_keys
+```
 
 After
 

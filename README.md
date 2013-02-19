@@ -1,7 +1,7 @@
 # LibertyReservePayments
 
 Receive payments via Liberty Reserve. With this gem the user of your shop
-can pay for a digital item (or any type of item) and validate the transaction
+can pay for a digital item (or any type of item) and you can validate the transaction
 after it was made.
 
 ## Installation

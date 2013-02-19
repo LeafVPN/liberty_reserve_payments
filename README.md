@@ -64,8 +64,14 @@ looking like this:
 def validate_payment
     handler = LibertyReservePayments::Handler.new LIBERTY_CONFIG
     if handler.valid?(params)
+        order = Order.find(params[:order_id]
         # The transaction has been validated. You can perform your own
         # validations now. You should specifically validate the amount that was paid.
+        if order.amount == params[:lr_amnt]
+            # Amount matches, you can proceed
+        else
+            # Log the transaction and inspect it later
+        end
     else
         # The transaction has been tampered with, you should log it for
         # later verification.

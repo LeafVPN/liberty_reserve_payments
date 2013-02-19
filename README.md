@@ -8,7 +8,7 @@ after it was made.
 
 Add this line to your application's Gemfile:
 
-    gem 'liberty_reserve_payments'
+    gem 'liberty_reserve_payments', '>=0.1.1'
 
 And then execute:
 
@@ -50,11 +50,11 @@ def pay_item_with_lr
     handler = LibertyReservePayments::Handler.new LIBERTY_CONFIG
     @item = Item.find(params[:id])
     # The payment_request_uri takes the following arguments:
-    # amount, currency = 'LRUSD', comments = '', order_id = '', item_name = ''
+    # amount, currency, order_id, item_name
     # item_name and order_id are baggage fields that should aid you on the validation of the transaction
     # The method will generate a URL containing the parameters for the payment and redirect to the
     # Liberty Reserve website
-    redirect_to handler.payment_request_uri(amount: @item.amount, order_id: '1', comment: 'Test Liberty')
+    redirect_to handler.payment_request_uri(@item.amount, 'LRUSD', '1', 'Test Item')
 end
 ```
 You should also add a route for Liberty Reserve to send the status of the transactions. It can point to a method

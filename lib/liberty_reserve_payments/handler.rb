@@ -20,7 +20,7 @@ module LibertyReservePayments
 
     def valid?(params)
       sha256 = Digest::SHA256.new
-      str = "#{params[:lr_paidto]}:#{params[:lr_paidby]}:#{params[:lr_store].gsub(/\\\//, '')}:#{params[:lr_amnt]}:#{params[:lr_transfer]}:#{params[:lr_currency]}:#{self.security_word}"
+      str = "#{self.account_number}:#{params[:lr_paidby]}:#{self.store_name.gsub(/\\\//, '')}:#{params[:lr_amnt]}:#{params[:lr_transfer]}:#{params[:lr_currency]}:#{self.security_word}"
       first_hash = sha256.digest(str)
       second_hash = first_hash.unpack('H*').first.upcase
       if params[:lr_encrypted] == second_hash and params[:lr_paidto] == self.account_number
